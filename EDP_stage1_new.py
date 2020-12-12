@@ -311,7 +311,6 @@ text_Bdown_CE = visual.TextStim(win=win, name='text_Bdown_CE',
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
  
-
 for i in range(0,19):
     text_Aup_CE.text = ''
     text_Adown_CE.text = ''
@@ -1327,6 +1326,7 @@ for i in range(0,19):
         granularity=5, style=('rating', 'whiteOnBlack'),
         color='black', font='HelveticaBold',
         flip=True)
+    slider.markerPos = (round((slidermin+sliderMax)/2/5))*5
     last = core.getTime()
 
     # keep track of which components have finished
