@@ -536,6 +536,7 @@ outcome_value = []
 total_reward = 0
 nowTime = 1000000000
 playPressed = False
+endPressed = False
 squareList = []
 
 print(outcome_pos)
@@ -912,11 +913,13 @@ while continueRoutine:
                         total_reward += outcome_value[i+10]
                     elif outcome_sign[i+10] == 1:
                         total_reward -= outcome_value[i+10]
-            text_total.text = "total: "+str(total_reward)
+            final_reward = total_reward / 50
+            text_total.text = "total: "+str(total_reward)+' / 50 = '+str(final_reward)
             buttonPlay.image = "./interface/buttonEnd.png"
             nowTime = core.getTime()
-            if core.getTime() - nowTime > 2 and mouse_outcome.isPressedIn(buttonPlay):
-                continueRoutine = False
+            
+        if playPressed and not endPressed and core.getTime() - nowTime > 2 and mouse_outcome.isPressedIn(buttonPlay):
+            continueRoutine = False
                 
 
     # check for quit (typically the Esc key)

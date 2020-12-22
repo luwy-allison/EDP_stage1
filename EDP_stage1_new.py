@@ -122,6 +122,7 @@ x6neg = text_x6neg_list[-1]
 x7neg = text_x7neg_list[-1]
 x8neg = text_x8neg_list[-1]
 all_point_data_list=[text_L_list,text_x1pos_list,text_x1neg_list,text_L2_list,text_x2pos_list,text_x3pos_list,text_x4pos_list,text_x5pos_list,text_x6pos_list,text_x7pos_list,text_x8pos_list,text_G2_list,text_x2neg_list,text_x3neg_list,text_x4neg_list,text_x5neg_list,text_x6neg_list,text_x7neg_list,text_x8neg_list]
+trial_order = ['L','x1pos','x1neg','L2','x2pos','x3pos','x4pos','x5pos','x6pos','x7pos','x8pos','G2','x2neg','x3neg','x4neg','x5neg','x6neg','x7neg','x8neg']
 
 # Initialize components for Routine "phase"
 phaseClock = core.Clock()
@@ -670,12 +671,11 @@ for i in range(0,19):
         for thisComponent in phaseComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        thisExp.addData('interface_phase.started', interface_phase.tStartRefresh)
-        thisExp.addData('interface_phase.stopped', interface_phase.tStopRefresh)
-        thisExp.addData('buttonOK_phase.started', buttonOK_phase.tStartRefresh)
-        thisExp.addData('buttonOK_phase.stopped', buttonOK_phase.tStopRefresh)
+                thisComponent.tStopRefresh = tThisFlipGlobal
+#        thisExp.addData('interface_phase1.start', interface_phase.tStartRefresh)
+#        thisExp.addData('interface_phase1.end', interface_phase.tStopRefresh)
         # store data for thisExp (ExperimentHandler)
-        thisExp.nextEntry()
+#        thisExp.nextEntry()
         # the Routine "phase" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         # ------Prepare to start Routine "interval"-------
@@ -858,12 +858,11 @@ for i in range(0,19):
         for thisComponent in phaseComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        thisExp.addData('interface_phase.started', interface_phase.tStartRefresh)
-        thisExp.addData('interface_phase.stopped', interface_phase.tStopRefresh)
-        thisExp.addData('buttonOK_phase.started', buttonOK_phase.tStartRefresh)
-        thisExp.addData('buttonOK_phase.stopped', buttonOK_phase.tStopRefresh)
+                thisComponent.tStopRefresh = tThisFlipGlobal
+#        thisExp.addData('interface_phase2.start', interface_phase.tStartRefresh)
+#        thisExp.addData('interface_phase2.end', interface_phase.tStopRefresh)
         # store data for thisExp (ExperimentHandler)
-        thisExp.nextEntry()
+#        thisExp.nextEntry()
         # the Routine "phase" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         # ------Prepare to start Routine "interval"-------
@@ -1037,12 +1036,11 @@ for i in range(0,19):
         for thisComponent in phaseComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        thisExp.addData('interface_phase.started', interface_phase.tStartRefresh)
-        thisExp.addData('interface_phase.stopped', interface_phase.tStopRefresh)
-        thisExp.addData('buttonOK_phase.started', buttonOK_phase.tStartRefresh)
-        thisExp.addData('buttonOK_phase.stopped', buttonOK_phase.tStopRefresh)
+                thisComponent.tStopRefresh = tThisFlipGlobal
+#        thisExp.addData('interface_phase3.started', interface_phase.tStartRefresh)
+#        thisExp.addData('interface_phase3.stopped', interface_phase.tStopRefresh)
         # store data for thisExp (ExperimentHandler)
-        thisExp.nextEntry()
+#        thisExp.nextEntry()
         # the Routine "phase" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         # ------Prepare to start Routine "interval"-------
@@ -1367,6 +1365,7 @@ for i in range(0,19):
         for thisComponent in TOComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
+                thisComponent.tStopRefresh = tThisFlipGlobal
 
         if i == 0:
             text_L_list[n+1] = target
@@ -1408,9 +1407,10 @@ for i in range(0,19):
             text_x8neg_list[n+1] = target
             
         # store data for thisExp (ExperimentHandler)
-        thisExp.addData('mouse_TO.started', mouse_TO.tStart)
-        thisExp.addData('mouse_TO.stopped', mouse_TO.tStop)
-        thisExp.nextEntry()
+        thisExp.addData('TO_'+trial_order[i]+'_'+str(n+1)+'.start', interface_TO.tStartRefresh)
+        thisExp.addData('TO_'+trial_order[i]+'_'+str(n+1)+'.end', interface_TO.tStopRefresh)
+        thisExp.addData(trial_order[i]+'_list', all_point_data_list[i])
+#        thisExp.nextEntry()
         # the Routine "TO" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
 
@@ -1790,6 +1790,7 @@ for i in range(0,19):
     for thisComponent in CEComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
+            thisComponent.tStopRefresh = tThisFlipGlobal
             
     if i == 0:
         text_L_list[-1] = int(slider.markerPos)
@@ -1867,13 +1868,12 @@ for i in range(0,19):
         x8neg = text_x8neg_list[-1]
         
     # store data for thisExp (ExperimentHandler)
-    thisExp.nextEntry()
-    thisExp.addData('slider.response', slider.getRating())
-    thisExp.addData('slider.rt', slider.getRT())
-    thisExp.addData('down.started', down.tStartRefresh)
-    thisExp.addData('down.stopped', down.tStopRefresh)
-    thisExp.addData('up.started', up.tStartRefresh)
-    thisExp.addData('up.stopped', up.tStopRefresh)
+    thisExp.addData('CE_'+trial_order[i]+'.start', interface_CE.tStartRefresh)
+    thisExp.addData('CE_'+trial_order[i]+'.end', interface_CE.tStopRefresh)
+    thisExp.addData('slider'+trial_order[i]+'.response', slider.getRating())
+    thisExp.addData('slider'+trial_order[i]+'.rt', slider.getRT())
+    thisExp.addData(trial_order[i], all_point_data_list[i][-1])
+    thisExp.addData(trial_order[i]+'_list', all_point_data_list[i])
     # the Routine "CE" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     # ------Prepare to start Routine "interval"-------
@@ -2097,8 +2097,11 @@ while continueRoutine:
 for thisComponent in random_2Components:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
+
+
 # store data for thisExp (ExperimentHandler)
-thisExp.nextEntry()
+thisExp.addData('reversed_trial', reversed_trial)
+#thisExp.nextEntry()
 # the Routine "random_2" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
@@ -2116,6 +2119,7 @@ outcome_value = []
 total_reward = 0
 nowTime = 1000000000
 playPressed = False
+endPressed = False
 squareList = []
 
 print(outcome_pos)
@@ -2428,6 +2432,8 @@ while continueRoutine:
             page = 2
             for i in range(0,10):
                 squareList[i].setAutoDraw(False)
+                text_x1neg.setAutoDraw(False)
+                text_x1pos.setAutoDraw(False)
             buttonPlay.image = "./interface/buttonPlay.png"
             interface_outcome.image = "./interface/outcome_2.png"
             playPressed = False
@@ -2490,11 +2496,12 @@ while continueRoutine:
                         total_reward += outcome_value[i+10]
                     elif outcome_sign[i+10] == 1:
                         total_reward -= outcome_value[i+10]
-            text_total.text = "total: "+str(total_reward)
+            final_reward = total_reward / 50
+            text_total.text = "total: "+str(total_reward)+' / 50 = '+str(final_reward)
             buttonPlay.image = "./interface/buttonEnd.png"
             nowTime = core.getTime()
-            if core.getTime() - nowTime > 2 and mouse_outcome.isPressedIn(buttonPlay):
-                continueRoutine = False
+        if playPressed and not endPressed and core.getTime() - nowTime > 2 and mouse_outcome.isPressedIn(buttonPlay):
+            continueRoutine = False
 
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -2517,15 +2524,13 @@ print(outcome_value)
 for thisComponent in outcomeComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-thisExp.addData('buttonPlay.started', buttonPlay.tStartRefresh)
-thisExp.addData('buttonPlay.stopped', buttonPlay.tStopRefresh)
-thisExp.addData('text_reversed_trials.started', text_reversed_trials.tStartRefresh)
-thisExp.addData('text_reversed_trials.stopped', text_reversed_trials.tStopRefresh)
+thisExp.addData('outcome_sign', outcome_sign)
+thisExp.addData('outcome_value', outcome_value)
+thisExp.addData('total_points', total_reward)
+thisExp.addData('final_reward', final_reward)
+thisExp.addData('all_point_data_list', all_point_data_list)
 # store data for thisExp (ExperimentHandler)
 
-if len(mouse_outcome.clicked_name):
-    thisExp.addData('mouse_outcome.clicked_name', mouse_outcome.clicked_name[0])
-thisExp.nextEntry()
 # the Routine "outcome" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
