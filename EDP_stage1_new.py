@@ -555,6 +555,23 @@ text_reversed_trials = visual.TextStim(win=win, name='text_reversed_trials',
 mouse_outcome = event.Mouse(win=win)
 x, y = [None, None]
 mouse_outcome.mouseClock = core.Clock()
+# Initialize components for Routine "result"
+resultClock = core.Clock()
+text_gameOutcome = visual.TextStim(win=win, name='text_gameOutcome',
+    text='game outcome : ',
+    font='Arial',
+    pos=(0, 300), height=40, wrapWidth=1280, ori=0, 
+    color='black', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-22.0);
+text_fianlReward = visual.TextStim(win=win, name='text_fianlReward',
+    text='final reward: ',
+    font='Arial',
+    pos=(0, 0), height=40, wrapWidth=1280, ori=0, 
+    color='black', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-22.0);
+key_result = keyboard.Keyboard()
 
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
@@ -1119,7 +1136,9 @@ for i in range(0,19):
     step = target
     sliderMax = None
     slidermin = None
+    thisTrialChoice = []
     for n in range(0,4):
+        choosePressed = False
         # ------Prepare to start Routine "TO"-------
         continueRoutine = True
         # update component parameters for each repeat
@@ -1324,7 +1343,9 @@ for i in range(0,19):
                 win.timeOnFlip(text_Bdown_TO, 'tStartRefresh')  # time at next scr refresh
                 text_Bdown_TO.setAutoDraw(True)
 
-            if mouse_TO.isPressedIn(buttonA):
+            if not choosePressed and mouse_TO.isPressedIn(buttonA):
+                choosePressed = True
+                thisTrialChoice.append('choose A')
                 if i == 0:
                     sliderMax = int(target)
                     target = target-(1/(2**(n+1)))*abs(step)
@@ -1332,7 +1353,9 @@ for i in range(0,19):
                     slidermin = int(target)
                     target = target+(1/(2**(n+1)))*abs(step)
                 
-            elif mouse_TO.isPressedIn(buttonB):
+            elif not choosePressed and mouse_TO.isPressedIn(buttonB):
+                choosePressed = True
+                thisTrialChoice.append('choose B')
                 if i == 0 :
                     slidermin = int(target)
                     target = target+(1/(2**(n+1)))*abs(step)
@@ -1410,6 +1433,7 @@ for i in range(0,19):
         thisExp.addData('TO_'+trial_order[i]+'_'+str(n+1)+'.start', interface_TO.tStartRefresh)
         thisExp.addData('TO_'+trial_order[i]+'_'+str(n+1)+'.end', interface_TO.tStopRefresh)
         thisExp.addData(trial_order[i]+'_list', all_point_data_list[i])
+        thisExp.addData(trial_order[i]+'choice_list', thisTrialChoice)
 #        thisExp.nextEntry()
         # the Routine "TO" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
@@ -1482,10 +1506,10 @@ for i in range(0,19):
                 thisComponent.setAutoDraw(False)
     
     if slidermin == None:
-        slidermin = target
+        slidermin = target - (sliderMax - target)
         print(slidermin,sliderMax)
     if sliderMax == None:
-        sliderMax = target
+        sliderMax = target + (target - slidermin)
         print(slidermin,sliderMax)
     # ------Prepare to start Routine "CE"-------
     continueRoutine = True
@@ -2501,6 +2525,8 @@ while continueRoutine:
             buttonPlay.image = "./interface/buttonEnd.png"
             nowTime = core.getTime()
         if playPressed and not endPressed and core.getTime() - nowTime > 2 and mouse_outcome.isPressedIn(buttonPlay):
+            for i in range(0,9):
+                squareList[i+10].setAutoDraw(False)
             continueRoutine = False
 
     # check for quit (typically the Esc key)
@@ -2520,6 +2546,7 @@ while continueRoutine:
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
 print(outcome_value)
+print("total reward: "+str(final_reward+160))
 # -------Ending Routine "outcome"-------
 for thisComponent in outcomeComponents:
     if hasattr(thisComponent, "setAutoDraw"):
@@ -2532,6 +2559,105 @@ thisExp.addData('all_point_data_list', all_point_data_list)
 # store data for thisExp (ExperimentHandler)
 
 # the Routine "outcome" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
+
+# ------Prepare to start Routine "result"-------
+continueRoutine = True
+# update component parameters for each repeat
+text_gameOutcome.text = 'game outcome : '+str(total_reward)+' / 50 = '+str(int(final_reward))
+if final_reward >=0:
+    text_fianlReward.text = 'final reward: ' + str(160) + ' + ' + str(final_reward) + ' = ' + str(int(final_reward+160))
+else:
+    text_fianlReward.text = 'final reward: ' + str(160)
+key_result.keys = []
+key_result.rt = []
+_key_result_allKeys = []
+# keep track of which components have finished
+resultComponents = [text_gameOutcome, text_fianlReward, key_result]
+for thisComponent in resultComponents:
+    thisComponent.tStart = None
+    thisComponent.tStop = None
+    thisComponent.tStartRefresh = None
+    thisComponent.tStopRefresh = None
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+# reset timers
+t = 0
+_timeToFirstFrame = win.getFutureFlipTime(clock="now")
+resultClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
+frameN = -1
+
+# -------Run Routine "result"-------
+while continueRoutine:
+    # get current time
+    t = resultClock.getTime()
+    tThisFlip = win.getFutureFlipTime(clock=resultClock)
+    tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+    
+    # *text_gameOutcome* updates
+    if text_gameOutcome.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        text_gameOutcome.frameNStart = frameN  # exact frame index
+        text_gameOutcome.tStart = t  # local t and not account for scr refresh
+        text_gameOutcome.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(text_gameOutcome, 'tStartRefresh')  # time at next scr refresh
+        text_gameOutcome.setAutoDraw(True)
+    
+    # *text_fianlReward* updates
+    if text_fianlReward.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        text_fianlReward.frameNStart = frameN  # exact frame index
+        text_fianlReward.tStart = t  # local t and not account for scr refresh
+        text_fianlReward.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(text_fianlReward, 'tStartRefresh')  # time at next scr refresh
+        text_fianlReward.setAutoDraw(True)
+    
+    # *key_result* updates
+    waitOnFlip = False
+    if key_result.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        key_result.frameNStart = frameN  # exact frame index
+        key_result.tStart = t  # local t and not account for scr refresh
+        key_result.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(key_result, 'tStartRefresh')  # time at next scr refresh
+        key_result.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(key_result.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(key_result.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if key_result.status == STARTED and not waitOnFlip:
+        theseKeys = key_result.getKeys(keyList=['right'], waitRelease=False)
+        _key_result_allKeys.extend(theseKeys)
+        if len(_key_result_allKeys):
+            key_result.keys = _key_result_allKeys[-1].name  # just the last key pressed
+            key_result.rt = _key_result_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
+    
+    # check for quit (typically the Esc key)
+    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+        core.quit()
+    
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in resultComponents:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+    
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "result"-------
+for thisComponent in resultComponents:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+# the Routine "result" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
 # Flip one final time so any remaining win.callOnFlip() 
